@@ -14,12 +14,12 @@ A plugin to resolve `.plt.sec` symbols in IDA.
 
 - Before:
 
-![](assets\before.png)
+![](assets/before.png)
 
-![](assets\before2.png)
+![](assets/before2.png)
 
 - After:
 
-![](assets\after.png)
+![](assets/after.png)
 
-![](assets\after2.png)
+![](assets/after2.png)
