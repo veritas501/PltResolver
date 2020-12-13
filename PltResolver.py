@@ -50,9 +50,13 @@ def PltResolver64():
 				SetFuncFlags(plt_func)
 				# rename plt.sec
 				for addr in idautils.DataRefsTo(r_off):
-					plt_sec_func = idaapi.get_func(addr).startEA
-					idc.set_name(plt_sec_func,'_'+name)
-					SetFuncFlags(plt_sec_func)
+					plt_sec_func = idaapi.get_func(addr)
+					if plt_sec_func:
+						plt_sec_func_addr = plt_sec_func.startEA
+						idc.set_name(plt_sec_func_addr,'_'+name)
+						SetFuncFlags(plt_sec_func_addr)
+					else:
+						print "[!] idaapi.get_func({}) failed".format(hex(addr))
 			idx+=1
 
 	dyn = GetDyn()
@@ -119,9 +123,13 @@ def PltResolver32():
 				SetFuncFlags(plt_func)
 				# rename plt.sec
 				for addr in idautils.DataRefsTo(r_off):
-					plt_sec_func = idaapi.get_func(addr).startEA
-					idc.set_name(plt_sec_func,'_'+name)
-					SetFuncFlags(plt_sec_func)
+					plt_sec_func = idaapi.get_func(addr)
+					if plt_sec_func:
+						plt_sec_func_addr = plt_sec_func.startEA
+						idc.set_name(plt_sec_func_addr,'_'+name)
+						SetFuncFlags(plt_sec_func_addr)
+					else:
+						print "[!] idaapi.get_func({}) failed".format(hex(addr))
 				got_off = r_off-pltgot
 				target = '+{}h'.format(hex(got_off).lower().replace('0x','').replace('l','').rjust(2,'0'))
 				for func_ea in idautils.Functions(sec_start,sec_end):
